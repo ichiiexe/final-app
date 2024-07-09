@@ -14,12 +14,16 @@ function App() {
     setQuizStart(true);
   };
 
+  const handleBack = () => {
+    setQuizStart(false);
+  };
+
   return (
     <div className="flex h-dvh w-full flex-col items-center justify-center bg-blue-400">
       {!quizStart ? (
         <Option setData={handleData} setActive={handleActive} />
       ) : (
-        <Questions input={currCategory} />
+        <Questions input={currCategory} setBack={handleBack} />
       )}
     </div>
   );

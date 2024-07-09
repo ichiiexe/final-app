@@ -7,6 +7,7 @@ export function QuestionInput(props: any) {
       >
         <input
           onChange={props.onChange}
+          checked={props.check}
           name="selection"
           type={props.inputType}
           value={props.value}

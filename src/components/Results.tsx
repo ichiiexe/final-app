@@ -36,6 +36,12 @@ export function Results(props: any) {
       <h1 className="text-black/50">
         Auto restart in <span className="font-bold">{props.timer}</span> seconds
       </h1>
+      <h1 className="text-[10px] text-black/50">
+        or select new category{" "}
+        <button className="underline" onClick={props.handleHome}>
+          here
+        </button>
+      </h1>
     </>
   );
 }

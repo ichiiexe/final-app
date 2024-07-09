@@ -39,7 +39,7 @@ export function Questions(props: any) {
     if (counter <= 0 && !result) {
       // random answer///
       const randomAnswer = Object.entries(questions[currIndex].answers).filter(
-        (rando) => rando.includes(!null),
+        (rando) => !rando.includes(null),
       );
 
       const randomValue: any =
@@ -49,7 +49,7 @@ export function Questions(props: any) {
           )
         ];
 
-      console.log(randomAnswer);
+      console.log(randomValue);
 
       setSelectedAns(randomValue);
       clearTimeout(timer);
@@ -83,13 +83,11 @@ export function Questions(props: any) {
       selectedAns === questions[currIndex].correct_answer
     ) {
       setScore(score + 1);
-      console.log("goodjob!");
     } else if (
       questions[currIndex].correct_answer === null &&
       multipleAnswer[0].includes(selectedAns + "_correct")
     ) {
       setScore(score + 1);
-      console.log("it is null and your choice is correct");
     }
 
     if (currIndex !== questions.length - 1) {
@@ -100,7 +98,8 @@ export function Questions(props: any) {
       setResult(true);
       setCounter(45);
     }
-    console.log(score);
+
+    setSelectedAns("");
   };
 
   //ANSWER SELECTION//
@@ -135,6 +134,7 @@ export function Questions(props: any) {
               if (answer !== null) {
                 return (
                   <QuestionInput
+                    check={selectedAns === value[index]}
                     onChange={handleSelAns}
                     answer={answer}
                     key={index}
@@ -179,6 +179,7 @@ export function Questions(props: any) {
           setCurrIndex(0);
           setScore(0);
         }}
+        handleHome={props.setBack}
       />
     );
   }
