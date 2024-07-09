@@ -13,6 +13,8 @@ export function Questions(props: any) {
   const [counter, setCounter] = useState<any>(30);
   const [score, setScore] = useState(0);
 
+  //FETCHER//
+
   const loader = async () => {
     const response = (await getQuestions(props.input)) as Question[];
 
@@ -31,13 +33,15 @@ export function Questions(props: any) {
     loader();
   }, []);
 
+  //TIMER//
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setCounter(counter - 1);
     }, 1000);
 
     if (counter <= 0 && !result) {
-      // random answer///
+      // RANDOM ANSWER AFTER TIME <= 0 //
       const randomAnswer = Object.entries(questions[currIndex].answers).filter(
         (rando) => !rando.includes(null),
       );
@@ -55,6 +59,8 @@ export function Questions(props: any) {
       clearTimeout(timer);
       handleNextQuest();
     } else if (counter <= 0 && result) {
+      // AUTO RESTART QUIZ AFTER RESULT TIMER //
+
       setCounter(30);
       setResult(false);
       setCurrIndex(0);
@@ -66,18 +72,16 @@ export function Questions(props: any) {
     };
   }, [counter]);
 
-  //handlers//
+  // HANDLERS //
 
   const handleNextQuest = () => {
-    console.log(questions);
-
     const multipleAnswer = Object.entries(
       questions[currIndex].correct_answers,
     ).filter((filtered) => filtered.includes("true"));
 
     setCurrIndex(currIndex + 1);
 
-    //answer check//
+    // ANSWER CHECK //
     if (
       questions[currIndex].correct_answer !== null &&
       selectedAns === questions[currIndex].correct_answer
@@ -90,6 +94,7 @@ export function Questions(props: any) {
       setScore(score + 1);
     }
 
+    //QUESTION[INDEX] CHECK//
     if (currIndex !== questions.length - 1) {
       setCurrIndex(currIndex + 1);
       setCounter(30);
@@ -106,6 +111,8 @@ export function Questions(props: any) {
   const handleSelAns = (e?: any) => {
     setSelectedAns(e.target.value);
   };
+
+  // JSX STATECHECK //
 
   if (hasLoaded && !result) {
     const { question, answers, multiple_correct_answers } =
