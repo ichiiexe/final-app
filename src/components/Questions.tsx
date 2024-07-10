@@ -53,8 +53,6 @@ export function Questions(props: any) {
           )
         ];
 
-      console.log(randomValue);
-
       setSelectedAns(randomValue);
       clearTimeout(timer);
       handleNextQuest();
@@ -75,6 +73,7 @@ export function Questions(props: any) {
   // HANDLERS //
 
   const handleNextQuest = () => {
+    console.log(questions);
     const multipleAnswer = Object.entries(
       questions[currIndex].correct_answers,
     ).filter((filtered) => filtered.includes("true"));
@@ -82,6 +81,7 @@ export function Questions(props: any) {
     setCurrIndex(currIndex + 1);
 
     // ANSWER CHECK //
+
     if (
       questions[currIndex].correct_answer !== null &&
       selectedAns === questions[currIndex].correct_answer

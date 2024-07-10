@@ -25,7 +25,7 @@ export function Option({ setData, setActive }: any) {
           Select category:
         </label>
         <select onChange={handleCurrCategory} className="rounded border p-1">
-          <option value="">any</option>
+          <option value="">Any</option>
           {categories.map((category) => (
             <option key={category.id} value={category.name}>
               {category.name}
